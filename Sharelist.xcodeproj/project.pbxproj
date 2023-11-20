@@ -33,6 +33,10 @@
 		BBBB1FAE2B0B73FC00F1AF9B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FAD2B0B73FC00F1AF9B /* SettingsView.swift */; };
 		BBBB1FB02B0B746B00F1AF9B /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FAF2B0B746B00F1AF9B /* ListModel.swift */; };
 		BBBB1FB22B0B756300F1AF9B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BBBB1FB12B0B756200F1AF9B /* README.md */; };
+		BBBB1FB72B0B7E7B00F1AF9B /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FB62B0B7E7B00F1AF9B /* ListViewModel.swift */; };
+		BBBB1FB92B0B81F000F1AF9B /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FB82B0B81F000F1AF9B /* ListView.swift */; };
+		BBBB1FBB2B0B821D00F1AF9B /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FBA2B0B821D00F1AF9B /* ListItemView.swift */; };
+		BBBB1FBD2B0B823800F1AF9B /* ListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FBC2B0B823800F1AF9B /* ListItemViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +81,10 @@
 		BBBB1FAD2B0B73FC00F1AF9B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BBBB1FAF2B0B746B00F1AF9B /* ListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		BBBB1FB12B0B756200F1AF9B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BBBB1FB62B0B7E7B00F1AF9B /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		BBBB1FB82B0B81F000F1AF9B /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		BBBB1FBA2B0B821D00F1AF9B /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
+		BBBB1FBC2B0B823800F1AF9B /* ListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +226,7 @@
 		BBBB1FA42B0B739500F1AF9B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BBBB1FB32B0B7E5200F1AF9B /* Lists */,
 				BBBB1F8D2B0B731D00F1AF9B /* Authentication */,
 				BBBB1FAB2B0B73E300F1AF9B /* Settings */,
 				BBBB1F982B0B736300F1AF9B /* Components */,
@@ -257,6 +266,33 @@
 				BBBB1FAD2B0B73FC00F1AF9B /* SettingsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		BBBB1FB32B0B7E5200F1AF9B /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB1FB42B0B7E5900F1AF9B /* View */,
+				BBBB1FB52B0B7E6000F1AF9B /* ViewModel */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
+		BBBB1FB42B0B7E5900F1AF9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB1FB82B0B81F000F1AF9B /* ListView.swift */,
+				BBBB1FBA2B0B821D00F1AF9B /* ListItemView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BBBB1FB52B0B7E6000F1AF9B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BBBB1FB62B0B7E7B00F1AF9B /* ListViewModel.swift */,
+				BBBB1FBC2B0B823800F1AF9B /* ListItemViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,11 +437,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBBB1FB92B0B81F000F1AF9B /* ListView.swift in Sources */,
+				BBBB1FBB2B0B821D00F1AF9B /* ListItemView.swift in Sources */,
 				BBBB1F912B0B732F00F1AF9B /* LoginView.swift in Sources */,
 				BBBB1F9C2B0B737300F1AF9B /* InputView.swift in Sources */,
 				BBBB1FAA2B0B73CE00F1AF9B /* TabBarView.swift in Sources */,
 				BBBB1FA92B0B73CE00F1AF9B /* ContentView.swift in Sources */,
 				BBBB1F9E2B0B737300F1AF9B /* CustomProgressView.swift in Sources */,
+				BBBB1FBD2B0B823800F1AF9B /* ListItemViewModel.swift in Sources */,
+				BBBB1FB72B0B7E7B00F1AF9B /* ListViewModel.swift in Sources */,
 				BBBB1F922B0B732F00F1AF9B /* RegisterView.swift in Sources */,
 				BBBB1F972B0B734E00F1AF9B /* AuthViewModel.swift in Sources */,
 				BBBB1FA32B0B738A00F1AF9B /* AuthError.swift in Sources */,

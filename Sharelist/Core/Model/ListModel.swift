@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ListModel: Codable, Identifiable {
     @DocumentID var id: String? // @DocumentID to fetch the identifier from Firestore
-    var title: String?
-    var userId: String?
+    var title: String
+    var userId: String
     var listItems: [ListItem]
 }
 

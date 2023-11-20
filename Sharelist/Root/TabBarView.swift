@@ -10,10 +10,10 @@ import SwiftUI
 struct TabBarView: View {
     var body: some View {
         TabView {
-//            MyListsView()
-//                .tabItem {
-//                    Label("Mes listes", systemImage: "list.bullet.circle")
-//                }
+            ListView()
+                .tabItem {
+                    Label("Mes listes", systemImage: "list.bullet.circle")
+                }
 //            
 //            InvitesView()
 //                .tabItem {
