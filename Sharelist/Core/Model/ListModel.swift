@@ -16,7 +16,7 @@ struct ListModel: Codable, Identifiable {
 }
 
 struct ListItem: Codable, Identifiable {
-    var id: String
+    @DocumentID var id: String?
     var title: String
     var completed: Bool
 }

@@ -15,7 +15,7 @@ struct ListView: View {
                     Color("CustomBackgroundColor").ignoresSafeArea()
                 List {
                     ForEach(viewModel.lists, id:\.id) { list in
-                        NavigationLink(destination: ListItemView().environmentObject(viewModel)) {
+                        NavigationLink(destination: ListItemView(viewModel: ListItemViewModel(list: list))) {
                             VStack(alignment: .leading) {
                                 if viewModel.isEditing {
                                     TextField("Nouveau titre", text: $viewModel.updatedTitle)
