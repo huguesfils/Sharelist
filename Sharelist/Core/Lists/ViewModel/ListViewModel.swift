@@ -10,7 +10,7 @@ import Firebase
 
 class ListViewModel: ObservableObject {
     @Published var lists = [ListModel]() // Reference to our Model
-    @Published var title: String = ""
+    @Published var title = ""
     @Published var presentAlert = false
     @Published var updatedTitle = ""
     @Published var isEditing = false

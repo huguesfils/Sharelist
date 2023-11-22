@@ -8,62 +8,47 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import Combine
 
 class ListItemViewModel: ObservableObject {
     @Published var list: ListModel
-    private var listenerRegistration: ListenerRegistration?
+    @Published var title = ""
+    
+    private var databaseReference = Firestore.firestore().collection("lists")
     
     init(list: ListModel) {
         self.list = list
-        fetchListItems()
+        fetchList()
     }
     
-    private func fetchListItems() {
-        let db = Firestore.firestore()
-        listenerRegistration = db.collection("lists").document(list.id!).collection("listItems").addSnapshotListener { querySnapshot, error in
-            guard let documents = querySnapshot?.documents else {
-                print("Error fetching documents: \(error!)")
-                return
-            }
-            
-            self.list.listItems = documents.compactMap { document in
-                try? document.data(as: ListItem.self)
+    func fetchList() {
+        let docRef = databaseReference.document(list.id!)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+            } else {
+                print("Document does not exist")
             }
         }
     }
     
     func addListItem() {
-        let db = Firestore.firestore()
-        let newListItem = ListItem(title: "Nouvel Item", completed: false)
+        let newListItem = ListItem(id: UUID().uuidString, title: "", completed: false)
         let data = try! Firestore.Encoder().encode(newListItem)
-        //let dictionary = try! JSONSerialization.jsonObject(with: data)
         
-        do {
-            _ = try db.collection("lists").document(list.id!).updateData([
-                "listItems": FieldValue.arrayUnion([data])
-            ])
-        } catch {
-            print("Error adding document: \(error)")
-        }
+        databaseReference.document(list.id!).updateData([
+            "listItems": FieldValue.arrayUnion([data])
+        ])
     }
     
-//    func updateList(title: String, id: String) {
-//        databaseReference.document(id).updateData(["title" : title]) { error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            } else {
-//                print("Note updated succesfully")
-//            }
-//        }
-//    }
-    
     func deleteListItem(at offsets: IndexSet) {
-        let db = Firestore.firestore()
-        
         offsets.forEach { index in
             let listItem = list.listItems[index]
-            db.collection("Lists").document(list.id!).collection("listItems").document(listItem.id!).delete { error in
+            let data = try! Firestore.Encoder().encode(listItem)
+            databaseReference.document(list.id!).updateData([
+                "listItems": FieldValue.arrayRemove([data])
+            ]) { error in
                 if let error = error {
                     print("Error removing document: \(error)")
                 }
