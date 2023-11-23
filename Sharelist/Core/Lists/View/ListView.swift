@@ -32,7 +32,7 @@ struct ListView: View {
                 .onAppear(perform: self.viewModel.fetchLists)
                 .navigationTitle("Mes listes")
                 .toolbar {
-                    ToolbarItem(placement: .bottomBar) {
+                    ToolbarItem(placement: .topBarTrailing) {
                         HStack {
                             Spacer()
                             Button {

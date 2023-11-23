@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ListItemView: View {
     @ObservedObject var viewModel: ListItemViewModel
-
-    @State var presentNewItem = false
+    
+    @State private var newItemTitle = ""
     
     var body: some View {
         ZStack{
@@ -18,18 +18,23 @@ struct ListItemView: View {
             List {
                 ForEach(viewModel.list.listItems) { item in
                     HStack {
-                        TextField("Nouvel élément", text: item.title)
+                        TextField("New Item Title", text: $newItemTitle) {
+                            viewModel.update
+                        }
                         Spacer()
-                        Image(systemName: item.completed ? "circle" : "checkmark.circle.fill")
+                        Image(systemName: "circle")
                             .resizable()
                             .frame(width: 20, height: 20)
                     }
                 }
                 .onDelete(perform: viewModel.deleteListItem)
+                
             }
             .navigationBarTitle(viewModel.list.title)
             .navigationBarItems(trailing: Button(action: {
-                viewModel.addListItem()
+                let newListItem = ListItem(id: UUID().uuidString, title: newItemTitle, completed: false)
+                viewModel.addListItem(newListItem)
+                newItemTitle = ""
             }) {
                 Image(systemName: "plus")
             })

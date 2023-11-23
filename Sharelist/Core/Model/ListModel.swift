@@ -9,21 +9,14 @@ import FirebaseFirestoreSwift
 import SwiftUI
 
 struct ListModel: Codable, Identifiable {
-    @DocumentID var id: String? // @DocumentID to fetch the identifier from Firestore
+    @DocumentID var id: String?
     var title: String
     var userId: String
     var listItems: [ListItem]
 }
 
 struct ListItem: Codable, Identifiable {
-    @DocumentID var id: String?
+    var id: String
     var title: String
-    var completed: Bool
+    var completed: Bool = false
 }
-
-#if DEBUG
-let testListItemData = [
-   ListItem(id: "", title: "item1", completed: true),
-   ListItem(id: "", title: "item2", completed: false)
-    ]
-#endif

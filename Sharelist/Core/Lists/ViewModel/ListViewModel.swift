@@ -44,7 +44,6 @@ class ListViewModel: ObservableObject {
         return true
     }
     
-    // function to read data
     func fetchLists() {
         databaseReference.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
@@ -59,7 +58,6 @@ class ListViewModel: ObservableObject {
         }
     }
     
-    // function to update data
     func updateList(title: String, id: String) {
         databaseReference.document(id).updateData(["title" : title]) { error in
             if let error = error {
@@ -70,7 +68,6 @@ class ListViewModel: ObservableObject {
         }
     }
     
-    // function to delete data
     func deleteList(at indexSet: IndexSet) {
         indexSet.forEach { index in
             let list = lists[index]

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB7727DF2B0E856500D4BADF /* ListItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7727DE2B0E856500D4BADF /* ListItemCellView.swift */; };
-		BB7727E12B0E856C00D4BADF /* ListItemCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7727E02B0E856C00D4BADF /* ListItemCellViewModel.swift */; };
 		BB947C482B0B70CD00107A74 /* SharelistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB947C472B0B70CD00107A74 /* SharelistApp.swift */; };
 		BB947C4C2B0B70CE00107A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB947C4B2B0B70CE00107A74 /* Assets.xcassets */; };
 		BB947C4F2B0B70CE00107A74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB947C4E2B0B70CE00107A74 /* Preview Assets.xcassets */; };
@@ -59,8 +57,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BB7727DE2B0E856500D4BADF /* ListItemCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListItemCellView.swift; sourceTree = "<group>"; };
-		BB7727E02B0E856C00D4BADF /* ListItemCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListItemCellViewModel.swift; sourceTree = "<group>"; };
 		BB947C442B0B70CD00107A74 /* Sharelist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharelist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB947C472B0B70CD00107A74 /* SharelistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharelistApp.swift; sourceTree = "<group>"; };
 		BB947C4B2B0B70CE00107A74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -286,7 +282,6 @@
 			children = (
 				BBBB1FB82B0B81F000F1AF9B /* ListView.swift */,
 				BBBB1FBA2B0B821D00F1AF9B /* ListItemView.swift */,
-				BB7727DE2B0E856500D4BADF /* ListItemCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -296,7 +291,6 @@
 			children = (
 				BBBB1FB62B0B7E7B00F1AF9B /* ListViewModel.swift */,
 				BBBB1FBC2B0B823800F1AF9B /* ListItemViewModel.swift */,
-				BB7727E02B0E856C00D4BADF /* ListItemCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -452,7 +446,6 @@
 				BBBB1F9E2B0B737300F1AF9B /* CustomProgressView.swift in Sources */,
 				BBBB1FBD2B0B823800F1AF9B /* ListItemViewModel.swift in Sources */,
 				BBBB1FB72B0B7E7B00F1AF9B /* ListViewModel.swift in Sources */,
-				BB7727E12B0E856C00D4BADF /* ListItemCellViewModel.swift in Sources */,
 				BBBB1F922B0B732F00F1AF9B /* RegisterView.swift in Sources */,
 				BBBB1F972B0B734E00F1AF9B /* AuthViewModel.swift in Sources */,
 				BBBB1FA32B0B738A00F1AF9B /* AuthError.swift in Sources */,
@@ -462,7 +455,6 @@
 				BBBB1FB02B0B746B00F1AF9B /* ListModel.swift in Sources */,
 				BB947C482B0B70CD00107A74 /* SharelistApp.swift in Sources */,
 				BBBB1FAE2B0B73FC00F1AF9B /* SettingsView.swift in Sources */,
-				BB7727DF2B0E856500D4BADF /* ListItemCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
