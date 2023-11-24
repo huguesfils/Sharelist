@@ -10,34 +10,43 @@ import SwiftUI
 struct ListItemView: View {
     @ObservedObject var viewModel: ListItemViewModel
     
-    @State private var newItemTitle = ""
-    
     var body: some View {
-        ZStack{
+        ZStack {
             Color("CustomBackgroundColor").ignoresSafeArea()
             List {
-                ForEach(viewModel.list.listItems) { item in
+                ForEach(viewModel.list.listItems, id: \.id) { item in
                     HStack {
-                        TextField("New Item Title", text: $newItemTitle) {
-                            viewModel.update
-                        }
+                        TextField("Nouvel élément", text: Binding(
+                            get: { item.title },
+                            set: { title in
+                                viewModel.updateListItemTitle(item: item, title: title)
+                            }
+                        ), onCommit: {
+                            viewModel.updateListItemTitle(item: item, title: item.title)
+                        })
                         Spacer()
-                        Image(systemName: "circle")
-                            .resizable()
-                            .frame(width: 20, height: 20)
+                        Button(action: {
+                            viewModel.toggleCompleted(for: item)
+                        }) {
+                            Image(systemName: item.completed ? "checkmark.circle.fill" : "circle")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                        }
                     }
                 }
-                .onDelete(perform: viewModel.deleteListItem)
-                
+                .onDelete(perform: deleteListItem)
             }
             .navigationBarTitle(viewModel.list.title)
             .navigationBarItems(trailing: Button(action: {
-                let newListItem = ListItem(id: UUID().uuidString, title: newItemTitle, completed: false)
-                viewModel.addListItem(newListItem)
-                newItemTitle = ""
+                viewModel.addListItem()
             }) {
                 Image(systemName: "plus")
             })
+        }
+    }
+    private func deleteListItem(at offsets: IndexSet) {
+        withAnimation {
+            viewModel.deleteListItems(at: offsets)
         }
     }
 }
