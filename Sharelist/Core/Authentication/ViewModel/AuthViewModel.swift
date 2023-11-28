@@ -29,7 +29,8 @@ class AuthViewModel: ObservableObject {
     init(currentUser: User? = nil) {
         self.userSession = Auth.auth().currentUser
         self.currentUser = currentUser
-        
+        print("DEBUG LOG:", userSession as Any)
+        print("DEBUG LOG:", currentUser as Any)
         Task {
             isLoading = true
             await fetchUser()
@@ -39,7 +40,6 @@ class AuthViewModel: ObservableObject {
     
     func signIn(withEmail email: String, password: String) async throws {
         isLoading = true
-        
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
@@ -102,10 +102,10 @@ class AuthViewModel: ObservableObject {
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             if let error = error {
                 // Gérer l'erreur ici
-                print("Erreur lors de l'envoi du lien de réinitialisation du mot de passe : \(error.localizedDescription)")
+                print("DEBUG: Error sending password reset link : \(error.localizedDescription)")
             } else {
                 // L'envoi du lien de réinitialisation du mot de passe a réussi
-                print("Lien de réinitialisation du mot de passe envoyé avec succès")
+                print("DEBUG: Password reset link sent successfully")
             }
         }
     }
