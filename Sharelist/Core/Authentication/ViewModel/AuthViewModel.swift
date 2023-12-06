@@ -26,9 +26,6 @@ class AuthViewModel: ObservableObject {
     @Published var fullname = ""
     @Published var confirmPassword = ""
     
-    private let auth = Auth.auth()
-    private let db = Firestore.firestore()
-    
     init(currentUser: User? = nil) {
         self.userSession = Auth.auth().currentUser
         self.currentUser = currentUser
@@ -44,7 +41,7 @@ class AuthViewModel: ObservableObject {
     func signIn(withEmail email: String, password: String) async throws {
         isLoading = true
         do {
-            let result = try await auth.signIn(withEmail: email, password: password)
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
             await fetchUser()
             isLoading = false
@@ -58,12 +55,13 @@ class AuthViewModel: ObservableObject {
     
     func createUser(withEmail email: String, password: String, fullname: String) async throws {
         isLoading = true
+        
         do {
-            let result = try await auth.createUser(withEmail: email, password: password)
+            let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
             let user = User(id: result.user.uid, fullname: fullname, email: email)
             guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
-            try await db.collection("users").document(result.user.uid).setData(encodedUser)
+            try await Firestore.firestore().collection("users").document(result.user.uid).setData(encodedUser)
             await fetchUser()
             isLoading = false
         } catch {
@@ -76,7 +74,7 @@ class AuthViewModel: ObservableObject {
     
     func signOut() {
         do {
-            try auth.signOut()
+            try Auth.auth().signOut()
             self.currentUser = nil
             self.userSession = nil
         } catch {
@@ -85,23 +83,25 @@ class AuthViewModel: ObservableObject {
     }
     
     func deleteAccount() async throws {
+        isLoading = true
         do {
             deleteUserData()
-            try await auth.currentUser?.delete()
+            try await Auth.auth().currentUser?.delete()
             self.currentUser = nil
             self.userSession = nil
+            isLoading = false
         } catch {
             print("DEBUG: Failed to delete account with error \(error.localizedDescription)")
         }
     }
     
     func deleteUserData() {
-        guard let uid = auth.currentUser?.uid else { return }
-        db.collection("users").document(uid).delete()
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).delete()
     }
     
     func sendResetPasswordLink(toEmail email: String) {
-        auth.sendPasswordReset(withEmail: email) { error in
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
             if let error = error {
                 print("DEBUG: Error sending password reset link : \(error.localizedDescription)")
             } else {
@@ -111,8 +111,8 @@ class AuthViewModel: ObservableObject {
     }
     
     func fetchUser() async {
-        guard let uid = auth.currentUser?.uid else { return }
-        guard let snapshot = try? await db.collection("users").document(uid).getDocument() else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.currentUser = try? snapshot.data(as: User.self)
     }
 }

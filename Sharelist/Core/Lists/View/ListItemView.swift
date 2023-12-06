@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListItemView: View {
     @ObservedObject var viewModel: ListItemViewModel
-    
+   
     var body: some View {
         ZStack {
             Color("CustomBackgroundColor").ignoresSafeArea()
@@ -37,16 +37,63 @@ struct ListItemView: View {
                 .onDelete(perform: deleteListItem)
             }
             .navigationBarTitle(viewModel.list.title)
-            .navigationBarItems(trailing: Button(action: {
-                viewModel.addListItem()
-            }) {
-                Image(systemName: "plus")
-            })
+            .toolbar {
+                           ToolbarItem(placement: .navigationBarTrailing) {
+                               Button(action: {
+                                   viewModel.addListItem()
+                               }) {
+                                   Image(systemName: "plus")
+                               }
+                           }
+                           ToolbarItem(placement: .navigationBarTrailing) {
+                               Button(action: {
+                                   viewModel.isShowingUserListView = true
+                               }) {
+                                   Image(systemName: "square.and.arrow.up")
+                               }
+                           }
+                       }
+        }
+        .sheet(isPresented: $viewModel.isShowingUserListView) {
+           
+                    VStack {
+                        SearchBar(text: $viewModel.searchText)
+                            .padding()
+                        
+                        List(viewModel.users.filter { $0.email.contains(viewModel.searchText) }) { user in
+                            Button(action: {
+                                viewModel.selectedUsers.append(user)
+                            }) {
+                                Text(user.email)
+                            }
+                        }
+                    }
+                    .onAppear {
+                        viewModel.fetchUsers()
+                    }
+                
         }
     }
     private func deleteListItem(at offsets: IndexSet) {
         withAnimation {
             viewModel.deleteListItems(at: offsets)
+        }
+    }
+}
+
+struct SearchBar: View {
+    @Binding var text: String
+    
+    var body: some View {
+        HStack {
+            TextField("Search", text: $text)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Button(action: {
+                text = ""
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.gray)
+            }
         }
     }
 }

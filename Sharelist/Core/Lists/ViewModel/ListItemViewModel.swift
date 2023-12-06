@@ -11,7 +11,10 @@ import FirebaseFirestoreSwift
 
 class ListItemViewModel: ObservableObject {
     @Published var list: ListModel
-
+    @Published var isShowingUserListView = false
+    @Published var searchText = ""
+    @Published var users: [User] = []
+    @Published var selectedUsers: [User] = []
     private var databaseReference = Firestore.firestore().collection("lists")
 
     init(list: ListModel) {
@@ -73,6 +76,34 @@ class ListItemViewModel: ObservableObject {
             databaseReference.document(list.id!).setData(data)
         } catch {
             print("Error updating document: \(error)")
+        }
+    }
+    
+    func fetchUsers() {
+        let db = Firestore.firestore()
+        db.collection("users").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching users: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("No documents found")
+                return
+            }
+            
+            let fetchedUsers = documents.compactMap { document -> User? in
+                do {
+                    return try document.data(as: User.self)
+                } catch {
+                    print("Error decoding user: \(error.localizedDescription)")
+                    return nil
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.users = fetchedUsers
+            }
         }
     }
 }

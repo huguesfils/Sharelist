@@ -226,8 +226,8 @@
 		BBBB1FA42B0B739500F1AF9B /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				BBBB1FB32B0B7E5200F1AF9B /* Lists */,
 				BBBB1F8D2B0B731D00F1AF9B /* Authentication */,
+				BBBB1FB32B0B7E5200F1AF9B /* Lists */,
 				BBBB1FAB2B0B73E300F1AF9B /* Settings */,
 				BBBB1F982B0B736300F1AF9B /* Components */,
 				BBBB1F9F2B0B737E00F1AF9B /* Model */,
