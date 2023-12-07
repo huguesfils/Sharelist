@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListItemView: View {
     @ObservedObject var viewModel: ListItemViewModel
-   
+    
     var body: some View {
         ZStack {
             Color("CustomBackgroundColor").ignoresSafeArea()
@@ -38,40 +38,38 @@ struct ListItemView: View {
             }
             .navigationBarTitle(viewModel.list.title)
             .toolbar {
-                           ToolbarItem(placement: .navigationBarTrailing) {
-                               Button(action: {
-                                   viewModel.addListItem()
-                               }) {
-                                   Image(systemName: "plus")
-                               }
-                           }
-                           ToolbarItem(placement: .navigationBarTrailing) {
-                               Button(action: {
-                                   viewModel.isShowingUserListView = true
-                               }) {
-                                   Image(systemName: "square.and.arrow.up")
-                               }
-                           }
-                       }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        viewModel.addListItem()
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        viewModel.isShowingUserListView = true
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                }
+            }
         }
         .sheet(isPresented: $viewModel.isShowingUserListView) {
-           
-                    VStack {
-                        SearchBar(text: $viewModel.searchText)
-                            .padding()
-                        
-                        List(viewModel.users.filter { $0.email.contains(viewModel.searchText) }) { user in
-                            Button(action: {
-                                viewModel.selectedUsers.append(user)
-                            }) {
-                                Text(user.email)
-                            }
-                        }
-                    }
-                    .onAppear {
-                        viewModel.fetchUsers()
-                    }
+            VStack {
+                SearchBar(text: $viewModel.searchText)
+                    .padding()
                 
+                List(viewModel.users.filter { $0.email.contains(viewModel.searchText) }) { user in
+                    Button(action: {
+                        viewModel.selectedUsers.append(user)
+                    }) {
+                        Text(user.email)
+                    }
+                }
+            }
+            .onAppear {
+                viewModel.fetchUsers()
+            }
         }
     }
     private func deleteListItem(at offsets: IndexSet) {
