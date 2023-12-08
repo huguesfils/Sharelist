@@ -22,7 +22,8 @@ struct ListItemView: View {
                                 viewModel.updateListItemTitle(item: item, title: title)
                             }
                         ), onCommit: {
-                            viewModel.updateListItemTitle(item: item, title: item.title)
+                            viewModel.addListItem()
+//                            viewModel.updateListItemTitle(item: item, title: item.title)
                         })
                         Spacer()
                         Button(action: {
@@ -97,6 +98,6 @@ struct SearchBar: View {
 }
 
 #Preview {
-    ListItemView(viewModel: ListItemViewModel(list: ListModel(id: "1", title: "Test", userId: "", listItems: [ListItem(id: "", title: "Item1", completed: true)])))
+    ListItemView(viewModel: ListItemViewModel(list: ListModel(title: "Test", userId: "", listItems: [ListItem(id: "", title: "Item1", completed: true)])))
 }
 

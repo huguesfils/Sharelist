@@ -44,42 +44,15 @@ class ListViewModel: ObservableObject {
         return true
     }
     
-//    func fetchLists() {
-//        databaseReference.addSnapshotListener { (querySnapshot, error) in
-//            guard let documents = querySnapshot?.documents else {
-//                print("No documents")
-//                return
-//            }
-//            
-//            self.lists = documents.compactMap { queryDocumentSnapshot -> ListModel? in
-//                print(self.lists)
-//                return try? queryDocumentSnapshot.data(as: ListModel.self)
-//            }
-//        }
-//    }
-    
     func fetchLists() {
-        let currentUser = Auth.auth().currentUser // Récupérer l'utilisateur en cours
-        
-        guard let currentUserId = currentUser?.uid else {
-            print("No current user")
-            return
-        }
-        
-        let query = Firestore.firestore().collection("lists").whereField("userId", isEqualTo: currentUserId)
-        
-        query.addSnapshotListener { (querySnapshot, error) in
+        databaseReference.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
             }
             
             self.lists = documents.compactMap { queryDocumentSnapshot -> ListModel? in
-                guard let listModel = try? queryDocumentSnapshot.data(as: ListModel.self) else {
-                    return nil
-                }
-                
-                return listModel
+                return try? queryDocumentSnapshot.data(as: ListModel.self)
             }
         }
     }
