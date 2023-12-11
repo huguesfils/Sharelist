@@ -43,9 +43,9 @@ class ListItemViewModel: ObservableObject {
     }
 
     func addListItem() {
-        updateList()
         let newListItem = ListItem(id: UUID().uuidString, title: "", completed: false)
         list.listItems.append(newListItem)
+        updateList()
     }
 
     func updateListItemTitle(item: ListItem, title: String) {
