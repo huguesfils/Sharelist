@@ -21,7 +21,9 @@ struct ListItemView: View {
                             set: { title in
                                 viewModel.updateListItemTitle(item: item, title: title)
                             }
-                        ))
+                        )).onSubmit {
+                            viewModel.addListItem()
+                        }
                         Spacer()
                         Button(action: {
                             viewModel.toggleCompleted(for: item)

@@ -45,17 +45,47 @@ class ListViewModel: ObservableObject {
     }
     
     func fetchLists() {
-        databaseReference.addSnapshotListener { (querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
-                print("No documents")
-                return
-            }
-            
-            self.lists = documents.compactMap { queryDocumentSnapshot -> ListModel? in
-                return try? queryDocumentSnapshot.data(as: ListModel.self)
-            }
-        }
-    }
+           let currentUser = Auth.auth().currentUser // Récupérer l'utilisateur en cours
+           
+           guard let currentUserId = currentUser?.uid else {
+               print("No current user")
+               return
+           }
+           
+           let query = Firestore.firestore().collection("lists").whereField("userId", isEqualTo: currentUserId)
+           
+           query.addSnapshotListener { (querySnapshot, error) in
+               guard let documents = querySnapshot?.documents else {
+                   print("No documents")
+                   return
+               }
+               
+               self.lists = documents.compactMap { queryDocumentSnapshot -> ListModel? in
+                   guard let listModel = try? queryDocumentSnapshot.data(as: ListModel.self) else {
+                       return nil
+                   }
+                   
+                   return listModel
+               }
+           }
+       }
+    
+//    func fetchLists() {
+//        databaseReference.addSnapshotListener { (querySnapshot, error) in
+//            guard let documents = querySnapshot?.documents else {
+//                print("No documents")
+//                return
+//            }
+//            
+//            self.lists = documents.compactMap { queryDocumentSnapshot -> ListModel? in
+//                do {
+//                    return try queryDocumentSnapshot.data(as: ListModel.self, decoder: Firestore.Decoder())
+//                } catch {
+//                    return nil
+//                }
+//            }
+//        }
+//    }
     
     func updateList(title: String, id: String) {
         databaseReference.document(id).updateData(["title" : title]) { error in

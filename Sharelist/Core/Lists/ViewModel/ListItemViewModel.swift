@@ -7,7 +7,6 @@
 
 import Foundation
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 class ListItemViewModel: ObservableObject {
     @Published var list: ListModel
@@ -19,30 +18,10 @@ class ListItemViewModel: ObservableObject {
 
     init(list: ListModel) {
         self.list = list
-        fetchList()
-    }
-
-    func fetchList() {
-        let docRef = databaseReference.document(list.id!)
-
-        docRef.addSnapshotListener { documentSnapshot, error in
-            guard let document = documentSnapshot else {
-                print("Error fetching document: \(error!)")
-                return
-            }
-            guard let data = document.data() else {
-                print("Document data was empty.")
-                return
-            }
-            do {
-                self.list = try Firestore.Decoder().decode(ListModel.self, from: data)
-            } catch {
-                print("Error decoding document: \(error)")
-            }
-        }
     }
 
     func addListItem() {
+        print("coucou")
         let newListItem = ListItem(id: UUID().uuidString, title: "", completed: false)
         list.listItems.append(newListItem)
         updateList()
