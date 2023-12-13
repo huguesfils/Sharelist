@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB03DC1B2B2A17CF00833811 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = BB03DC1A2B2A17CF00833811 /* Pow */; };
 		BB947C482B0B70CD00107A74 /* SharelistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB947C472B0B70CD00107A74 /* SharelistApp.swift */; };
 		BB947C4C2B0B70CE00107A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB947C4B2B0B70CE00107A74 /* Assets.xcassets */; };
 		BB947C4F2B0B70CE00107A74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB947C4E2B0B70CE00107A74 /* Preview Assets.xcassets */; };
@@ -95,6 +96,7 @@
 				BBBB1F8A2B0B722000F1AF9B /* FirebaseFirestoreSwift in Frameworks */,
 				BBBB1F842B0B722000F1AF9B /* FirebaseAnalyticsSwift in Frameworks */,
 				BBBB1F882B0B722000F1AF9B /* FirebaseFirestore in Frameworks */,
+				BB03DC1B2B2A17CF00833811 /* Pow in Frameworks */,
 				BBBB1F862B0B722000F1AF9B /* FirebaseAuth in Frameworks */,
 				BBBB1F822B0B722000F1AF9B /* FirebaseAnalytics in Frameworks */,
 			);
@@ -317,6 +319,7 @@
 				BBBB1F852B0B722000F1AF9B /* FirebaseAuth */,
 				BBBB1F872B0B722000F1AF9B /* FirebaseFirestore */,
 				BBBB1F892B0B722000F1AF9B /* FirebaseFirestoreSwift */,
+				BB03DC1A2B2A17CF00833811 /* Pow */,
 			);
 			productName = Sharelist;
 			productReference = BB947C442B0B70CD00107A74 /* Sharelist.app */;
@@ -392,6 +395,7 @@
 			mainGroup = BB947C3B2B0B70CD00107A74;
 			packageReferences = (
 				BBBB1F802B0B722000F1AF9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BB03DC192B2A17CF00833811 /* XCRemoteSwiftPackageReference "Pow" */,
 			);
 			productRefGroup = BB947C452B0B70CD00107A74 /* Products */;
 			projectDirPath = "";
@@ -791,6 +795,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BB03DC192B2A17CF00833811 /* XCRemoteSwiftPackageReference "Pow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EmergeTools/Pow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		BBBB1F802B0B722000F1AF9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -802,6 +814,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BB03DC1A2B2A17CF00833811 /* Pow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB03DC192B2A17CF00833811 /* XCRemoteSwiftPackageReference "Pow" */;
+			productName = Pow;
+		};
 		BBBB1F812B0B722000F1AF9B /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BBBB1F802B0B722000F1AF9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
