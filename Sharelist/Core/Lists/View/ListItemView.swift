@@ -61,10 +61,16 @@ struct ListItemView: View {
                             .padding()
                         
                         List(viewModel.users.filter { $0.email.localizedCaseInsensitiveContains(viewModel.searchText) }) { user in
-                            Button(action: {
-                                viewModel.selectedUsers.append(user)
-                            }) {
+                            HStack {
                                 Text(user.email)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    viewModel.addUser(user: user)
+                                }) {
+                                    Image(systemName: viewModel.selectedUsers.contains { $0.id == user.id } ? "checkmark.circle.fill" : "plus")
+                                }
                             }
                         }
                     }

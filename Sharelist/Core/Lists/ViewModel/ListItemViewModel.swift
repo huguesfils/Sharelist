@@ -20,7 +20,7 @@ class ListItemViewModel: ObservableObject {
         self.list = list
     }
 
-    func addListItem() {
+    func addListItem() {  
         let newListItem = ListItem(id: UUID().uuidString, title: "", completed: false)
         list.listItems.append(newListItem)
         updateList()
@@ -83,5 +83,14 @@ class ListItemViewModel: ObservableObject {
                 self.users = fetchedUsers
             }
         }
+    }
+    
+    func addUser(user: User) {
+        if selectedUsers.contains(where: { $0.id == user.id }) {
+            selectedUsers.removeAll(where: { $0.id == user.id })
+        } else {
+            selectedUsers.append(user)
+        }
+        print(selectedUsers)
     }
 }

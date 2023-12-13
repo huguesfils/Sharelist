@@ -64,7 +64,6 @@ class ListViewModel: ObservableObject {
                 guard let listModel = try? queryDocumentSnapshot.data(as: ListModel.self) else {
                     return nil
                 }
-                
                 return listModel
             }
         }
