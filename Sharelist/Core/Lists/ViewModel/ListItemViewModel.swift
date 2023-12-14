@@ -13,7 +13,7 @@ class ListItemViewModel: ObservableObject {
     @Published var isShowingUserListView = false
     @Published var searchText = ""
     @Published var users: [User] = []
-    @Published var selectedUsers: [User] = []
+    
     private var databaseReference = Firestore.firestore().collection("lists")
 
     init(list: ListModel) {
@@ -85,12 +85,14 @@ class ListItemViewModel: ObservableObject {
         }
     }
     
-    func addUser(user: User) {
-        if selectedUsers.contains(where: { $0.id == user.id }) {
-            selectedUsers.removeAll(where: { $0.id == user.id })
+    func addGuest(userId: String) {
+        if list.guests.contains(where: { $0 == userId}) {
+            list.guests.removeAll(where: { $0 == userId })
+            updateList()
         } else {
-            selectedUsers.append(user)
+            list.guests.append(userId)
+            updateList()
         }
-        print(selectedUsers)
+        print( list.guests)
     }
 }

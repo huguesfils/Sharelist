@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB003AF12B2B18AC000B454F /* InvitesListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB003AF02B2B18AC000B454F /* InvitesListsView.swift */; };
+		BB003AF42B2B18C4000B454F /* InvitesListsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB003AF32B2B18C4000B454F /* InvitesListsViewModel.swift */; };
+		BB003AF62B2B1A0C000B454F /* InvitesListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB003AF52B2B1A0C000B454F /* InvitesListItemView.swift */; };
+		BB003AF82B2B1A1E000B454F /* InvitesListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB003AF72B2B1A1E000B454F /* InvitesListItemViewModel.swift */; };
 		BB03DC1B2B2A17CF00833811 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = BB03DC1A2B2A17CF00833811 /* Pow */; };
 		BB947C482B0B70CD00107A74 /* SharelistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB947C472B0B70CD00107A74 /* SharelistApp.swift */; };
 		BB947C4C2B0B70CE00107A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB947C4B2B0B70CE00107A74 /* Assets.xcassets */; };
@@ -58,6 +62,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB003AF02B2B18AC000B454F /* InvitesListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListsView.swift; sourceTree = "<group>"; };
+		BB003AF32B2B18C4000B454F /* InvitesListsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListsViewModel.swift; sourceTree = "<group>"; };
+		BB003AF52B2B1A0C000B454F /* InvitesListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListItemView.swift; sourceTree = "<group>"; };
+		BB003AF72B2B1A1E000B454F /* InvitesListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListItemViewModel.swift; sourceTree = "<group>"; };
 		BB947C442B0B70CD00107A74 /* Sharelist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharelist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB947C472B0B70CD00107A74 /* SharelistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharelistApp.swift; sourceTree = "<group>"; };
 		BB947C4B2B0B70CE00107A74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -119,6 +127,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB003AED2B2B186D000B454F /* Invites */ = {
+			isa = PBXGroup;
+			children = (
+				BB003AEE2B2B187F000B454F /* View */,
+				BB003AEF2B2B1885000B454F /* ViewModel */,
+			);
+			path = Invites;
+			sourceTree = "<group>";
+		};
+		BB003AEE2B2B187F000B454F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB003AF02B2B18AC000B454F /* InvitesListsView.swift */,
+				BB003AF52B2B1A0C000B454F /* InvitesListItemView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BB003AEF2B2B1885000B454F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BB003AF32B2B18C4000B454F /* InvitesListsViewModel.swift */,
+				BB003AF72B2B1A1E000B454F /* InvitesListItemViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		BB947C3B2B0B70CD00107A74 = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +265,7 @@
 			children = (
 				BBBB1F8D2B0B731D00F1AF9B /* Authentication */,
 				BBBB1FB32B0B7E5200F1AF9B /* Lists */,
+				BB003AED2B2B186D000B454F /* Invites */,
 				BBBB1FAB2B0B73E300F1AF9B /* Settings */,
 				BBBB1F982B0B736300F1AF9B /* Components */,
 				BBBB1F9F2B0B737E00F1AF9B /* Model */,
@@ -443,12 +479,15 @@
 			files = (
 				BBBB1FB92B0B81F000F1AF9B /* ListView.swift in Sources */,
 				BBBB1FBB2B0B821D00F1AF9B /* ListItemView.swift in Sources */,
+				BB003AF82B2B1A1E000B454F /* InvitesListItemViewModel.swift in Sources */,
 				BBBB1F912B0B732F00F1AF9B /* LoginView.swift in Sources */,
+				BB003AF42B2B18C4000B454F /* InvitesListsViewModel.swift in Sources */,
 				BBBB1F9C2B0B737300F1AF9B /* InputView.swift in Sources */,
 				BBBB1FAA2B0B73CE00F1AF9B /* TabBarView.swift in Sources */,
 				BBBB1FA92B0B73CE00F1AF9B /* ContentView.swift in Sources */,
 				BBBB1F9E2B0B737300F1AF9B /* CustomProgressView.swift in Sources */,
 				BBBB1FBD2B0B823800F1AF9B /* ListItemViewModel.swift in Sources */,
+				BB003AF62B2B1A0C000B454F /* InvitesListItemView.swift in Sources */,
 				BBBB1FB72B0B7E7B00F1AF9B /* ListViewModel.swift in Sources */,
 				BBBB1F922B0B732F00F1AF9B /* RegisterView.swift in Sources */,
 				BBBB1F972B0B734E00F1AF9B /* AuthViewModel.swift in Sources */,
@@ -457,6 +496,7 @@
 				BBBB1F932B0B732F00F1AF9B /* ResetPasswordView.swift in Sources */,
 				BBBB1FA22B0B738A00F1AF9B /* User.swift in Sources */,
 				BBBB1FB02B0B746B00F1AF9B /* ListModel.swift in Sources */,
+				BB003AF12B2B18AC000B454F /* InvitesListsView.swift in Sources */,
 				BB947C482B0B70CD00107A74 /* SharelistApp.swift in Sources */,
 				BBBB1FAE2B0B73FC00F1AF9B /* SettingsView.swift in Sources */,
 			);

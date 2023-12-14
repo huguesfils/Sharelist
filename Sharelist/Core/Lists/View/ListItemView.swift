@@ -67,9 +67,9 @@ struct ListItemView: View {
                                 Spacer()
                                 
                                 Button(action: {
-                                    viewModel.addUser(user: user)
+                                    viewModel.addGuest(userId: user.id)
                                 }) {
-                                    Image(systemName: viewModel.selectedUsers.contains { $0.id == user.id } ? "checkmark.circle.fill" : "plus")
+                                    Image(systemName: viewModel.list.guests.contains { $0 == user.id } ? "checkmark.circle.fill" : "plus")
                                 }
                             }
                         }
@@ -113,6 +113,6 @@ struct SearchBar: View {
 }
 
 #Preview {
-    ListItemView(viewModel: ListItemViewModel(list: ListModel(id: "1", title: "Test", userId: "", listItems: [ListItem(id: "", title: "Item1", completed: true)])))
+    ListItemView(viewModel: ListItemViewModel(list: ListModel(id: "1", title: "Test", userId: "", listItems: [ListItem(id: "", title: "Item1", completed: true)], guests: ["1234"])))
 }
 

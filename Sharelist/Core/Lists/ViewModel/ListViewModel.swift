@@ -29,7 +29,7 @@ class ListViewModel: ObservableObject {
             return
         }
         
-        let newList = ListModel(title: title, userId: userId, listItems: [])
+        let newList = ListModel(title: title, userId: userId, listItems: [], guests: [])
         do {
             let _ = try databaseReference.addDocument(from: newList)
         } catch let error {

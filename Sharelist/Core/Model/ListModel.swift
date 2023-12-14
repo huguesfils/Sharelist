@@ -13,12 +13,14 @@ struct ListModel: Codable, Identifiable {
     var title: String
     var userId: String?
     var listItems: [ListItem]
+    var guests: [String]
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case userId
         case listItems
+        case guests
     }
 }
 

@@ -14,11 +14,11 @@ struct TabBarView: View {
                 .tabItem {
                     Label("Mes listes", systemImage: "list.bullet.circle")
                 }
-//            
-//            InvitesView()
-//                .tabItem {
-//                    Label("Invitations", systemImage: "checklist")
-//                }
+            
+            InvitesListsView()
+                .tabItem {
+                    Label("Invitations", systemImage: "checklist")
+                }
             
             SettingsView()
                 .tabItem {
