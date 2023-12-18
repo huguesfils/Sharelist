@@ -20,8 +20,12 @@ struct InvitesListItemView: View {
                         
                         Spacer()
                         
+                        if let completedBy = item.completedBy {
+                            Text(completedBy.fullname)
+                        }
+                        
                         Button(action: {
-                           viewModel.toggleCompleted(for: item)
+                            viewModel.toggleCompleted(for: item)
                         }) {
                             Image(systemName: item.completed ? "checkmark.circle.fill" : "circle")
                                 .resizable()
@@ -32,9 +36,10 @@ struct InvitesListItemView: View {
             }
             .navigationBarTitle(viewModel.list.title)
         }
+        
     }
 }
 
 #Preview {
-    InvitesListItemView(viewModel: InvitesListItemViewModel(list: ListModel(title: "1", listItems: [ListItem(title: "item", completed: false)], guests: ["1234"])))
+    InvitesListItemView(viewModel: InvitesListItemViewModel(list: ListModel(title: "1", listItems: [ListItem(title: "item", completed: false, completedBy: User(id: "1", fullname: "Test Test", email: "test@test.com"))], guests: ["1234"])))
 }

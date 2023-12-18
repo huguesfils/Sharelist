@@ -28,4 +28,5 @@ struct ListItem: Codable, Identifiable {
     var id: String?
     var title: String
     var completed: Bool = false
+    var completedBy: User?
 }

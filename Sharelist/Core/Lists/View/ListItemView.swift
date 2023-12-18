@@ -25,6 +25,11 @@ struct ListItemView: View {
                             viewModel.addListItem()
                         }
                         Spacer()
+                        
+                        if let completedBy = item.completedBy {
+                            Text(completedBy.fullname)
+                        }
+                        
                         Button(action: {
                             viewModel.toggleCompleted(for: item)
                         }) {
@@ -113,6 +118,6 @@ struct SearchBar: View {
 }
 
 #Preview {
-    ListItemView(viewModel: ListItemViewModel(list: ListModel(id: "1", title: "Test", userId: "", listItems: [ListItem(id: "", title: "Item1", completed: true)], guests: ["1234"])))
+    ListItemView(viewModel: ListItemViewModel(list: ListModel(id: "1", title: "Test", userId: "", listItems: [ListItem(id: "", title: "Item1", completed: true, completedBy: User(id: "1", fullname: "test test", email: "exemple@mail.com"))], guests: ["1234"])))
 }
 

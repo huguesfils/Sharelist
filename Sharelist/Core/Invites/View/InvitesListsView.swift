@@ -27,7 +27,7 @@ struct InvitesListsView: View {
                     }
                 }
                 .onAppear(perform: self.viewModel.fetchLists)
-                .navigationTitle("Mes listes")
+                .navigationTitle("Listes reçues")
             }
         }
     }

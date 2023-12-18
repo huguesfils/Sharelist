@@ -7,37 +7,65 @@
 
 import Foundation
 import FirebaseFirestore
+import Firebase
 
+@MainActor
 class ListItemViewModel: ObservableObject {
     @Published var list: ListModel
     @Published var isShowingUserListView = false
     @Published var searchText = ""
     @Published var users: [User] = []
+    @Published var completedByUsers: [String: User] = [:]
+    @Published var currentUser: User?
     
     private var databaseReference = Firestore.firestore().collection("lists")
-
+    
     init(list: ListModel) {
         self.list = list
+        Task {
+            await fetchUser()
+        }
     }
-
-    func addListItem() {  
+    
+    func addListItem() {
         let newListItem = ListItem(id: UUID().uuidString, title: "", completed: false)
         list.listItems.append(newListItem)
         updateList()
     }
-
+    
     func updateListItemTitle(item: ListItem, title: String) {
         guard let index = list.listItems.firstIndex(where: { $0.id == item.id }) else { return }
         list.listItems[index].title = title
         updateList()
     }
-
+    
     func toggleCompleted(for item: ListItem) {
+        
         guard let index = list.listItems.firstIndex(where: { $0.id == item.id }) else { return }
-        list.listItems[index].completed.toggle()
+        var currentItem = list.listItems[index]
+        
+        if !currentItem.completed && currentItem.completedBy == nil {
+            currentItem.completed = true
+            currentItem.completedBy = currentUser
+        } else if currentItem.completed && (currentItem.completedBy == currentUser) {
+            currentItem.completed = false
+            currentItem.completedBy = nil
+        } else {
+            return
+        }
+        
+        list.listItems[index] = currentItem
+        
         updateList()
+        
     }
-
+    
+    func fetchUser() async {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        self.currentUser = try? snapshot.data(as: User.self)
+    }
+    
     func deleteListItems(at offsets: IndexSet) {
         let itemsToDelete = offsets.map { index in
             list.listItems[index]
@@ -47,7 +75,7 @@ class ListItemViewModel: ObservableObject {
         }
         updateList()
     }
-
+    
     private func updateList() {
         do {
             let data = try Firestore.Encoder().encode(list)
@@ -93,6 +121,6 @@ class ListItemViewModel: ObservableObject {
             list.guests.append(userId)
             updateList()
         }
-        print( list.guests)
+        print("DEBUG: Guests => ",list.guests)
     }
 }
