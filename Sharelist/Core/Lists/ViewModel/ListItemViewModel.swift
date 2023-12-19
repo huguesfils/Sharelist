@@ -27,6 +27,7 @@ class ListItemViewModel: ObservableObject {
         }
     }
     
+    
     func addListItem() {
         let newListItem = ListItem(id: UUID().uuidString, title: "", completed: false)
         list.listItems.append(newListItem)
@@ -109,6 +110,8 @@ class ListItemViewModel: ObservableObject {
             
             DispatchQueue.main.async {
                 self.users = fetchedUsers
+                print("update users with list")
+                print(self.users)
             }
         }
     }
@@ -122,5 +125,6 @@ class ListItemViewModel: ObservableObject {
             updateList()
         }
         print("DEBUG: Guests => ",list.guests)
+        fetchUsers()
     }
 }

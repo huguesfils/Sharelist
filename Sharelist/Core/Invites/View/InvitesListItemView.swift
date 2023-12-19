@@ -36,7 +36,6 @@ struct InvitesListItemView: View {
             }
             .navigationBarTitle(viewModel.list.title)
         }
-        
     }
 }
 

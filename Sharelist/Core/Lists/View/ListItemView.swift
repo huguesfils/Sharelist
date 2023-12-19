@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ListItemView: View {
     @ObservedObject var viewModel: ListItemViewModel
+    @State var isSheetVisible: Bool = false
     
     var body: some View {
         ZStack {
@@ -24,6 +25,7 @@ struct ListItemView: View {
                         )).onSubmit {
                             viewModel.addListItem()
                         }
+                        
                         Spacer()
                         
                         if let completedBy = item.completedBy {
@@ -53,46 +55,45 @@ struct ListItemView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.isShowingUserListView = true
+                        isSheetVisible = true
                     }) {
                         Image(systemName: "square.and.arrow.up")
                     }
                 }
             }
         }
-        .sheet(isPresented: $viewModel.isShowingUserListView) {
-                    VStack {
-                        SearchBar(text: $viewModel.searchText)
-                            .padding()
+        .sheet(isPresented: $isSheetVisible) {
+            VStack {
+                SearchBar(text: $viewModel.searchText)
+                    .padding()
+                
+                List(viewModel.users.filter { $0.email.localizedCaseInsensitiveContains(viewModel.searchText) }) { user in
+                    HStack {
+                        Text(user.email)
                         
-                        List(viewModel.users.filter { $0.email.localizedCaseInsensitiveContains(viewModel.searchText) }) { user in
-                            HStack {
-                                Text(user.email)
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    viewModel.addGuest(userId: user.id)
-                                }) {
-                                    Image(systemName: viewModel.list.guests.contains { $0 == user.id } ? "checkmark.circle.fill" : "plus")
-                                }
-                            }
+                        Spacer()
+                        
+                        Button(action: {
+                            viewModel.addGuest(userId: user.id)
+                        }) {
+                            Image(systemName: viewModel.list.guests.contains { $0 == user.id } ? "checkmark.circle.fill" : "plus")
                         }
                     }
-                    
-                    Button(action: {
-                        viewModel.isShowingUserListView = false
-                    }) {
-                        Text("Fermer")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-                    .padding()
                 }
-                .onAppear {
-                    viewModel.fetchUsers()
+                Button(action: {
+                    isSheetVisible = false
+                }) {
+                    Text("Fermer")
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
-
+                .padding()
+            }
+            .onAppear {
+                viewModel.fetchUsers()
+            }
+        }
     }
+    
     private func deleteListItem(at offsets: IndexSet) {
         withAnimation {
             viewModel.deleteListItems(at: offsets)

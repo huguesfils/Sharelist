@@ -42,7 +42,6 @@ class InvitesListItemViewModel: ObservableObject {
         list.listItems[index] = currentItem
         
         updateList()
-        
     }
     
     func fetchUser() async {

@@ -21,6 +21,7 @@ class ListViewModel: ObservableObject {
         fetchLists()
     }
     
+    
     func addList() {
         guard canSave else {
             return
@@ -36,6 +37,7 @@ class ListViewModel: ObservableObject {
             fatalError(error.localizedDescription)
         }
     }
+    
     
     var canSave: Bool {
         guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
@@ -59,7 +61,7 @@ class ListViewModel: ObservableObject {
                 print("No documents")
                 return
             }
-            
+            print("update list")
             self.lists = documents.compactMap { queryDocumentSnapshot -> ListModel? in
                 guard let listModel = try? queryDocumentSnapshot.data(as: ListModel.self) else {
                     return nil
