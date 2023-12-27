@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ListItemView: View {
     @ObservedObject var viewModel: ListItemViewModel
+    @Environment(\.presentationMode) var presentationMode
     @State var isSheetVisible: Bool = false
     
+
     var body: some View {
         ZStack {
             Color("CustomBackgroundColor").ignoresSafeArea()
@@ -81,7 +83,14 @@ struct ListItemView: View {
                     }
                 }
                 Button(action: {
-                    isSheetVisible = false
+
+                    if viewModel.shouldUpdateList {
+                        viewModel.updateList()
+                        viewModel.shouldUpdateList = false
+                        isSheetVisible = false
+                    } else {
+                        isSheetVisible = false
+                    }
                 }) {
                     Text("Fermer")
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -90,6 +99,12 @@ struct ListItemView: View {
             }
             .onAppear {
                 viewModel.fetchUsers()
+            }
+            .onDisappear {
+                if viewModel.shouldUpdateList {
+                    viewModel.updateList()
+                    viewModel.shouldUpdateList = false
+                }
             }
         }
     }

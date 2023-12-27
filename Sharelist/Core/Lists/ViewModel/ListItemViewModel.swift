@@ -17,6 +17,7 @@ class ListItemViewModel: ObservableObject {
     @Published var users: [User] = []
     @Published var completedByUsers: [String: User] = [:]
     @Published var currentUser: User?
+    @Published var shouldUpdateList = false
     
     private var databaseReference = Firestore.firestore().collection("lists")
     
@@ -77,7 +78,7 @@ class ListItemViewModel: ObservableObject {
         updateList()
     }
     
-    private func updateList() {
+    func updateList() {
         do {
             let data = try Firestore.Encoder().encode(list)
             databaseReference.document(list.id!).setData(data)
@@ -119,12 +120,14 @@ class ListItemViewModel: ObservableObject {
     func addGuest(userId: String) {
         if list.guests.contains(where: { $0 == userId}) {
             list.guests.removeAll(where: { $0 == userId })
-            updateList()
+//            updateList()
         } else {
             list.guests.append(userId)
-            updateList()
+//            updateList()
+            
         }
         print("DEBUG: Guests => ",list.guests)
-        fetchUsers()
+        shouldUpdateList = true
+//        fetchUsers()
     }
 }
