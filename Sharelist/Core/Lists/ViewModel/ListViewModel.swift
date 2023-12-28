@@ -61,7 +61,6 @@ class ListViewModel: ObservableObject {
                 print("No documents")
                 return
             }
-            print("update list")
             self.lists = documents.compactMap { queryDocumentSnapshot -> ListModel? in
                 guard let listModel = try? queryDocumentSnapshot.data(as: ListModel.self) else {
                     return nil
