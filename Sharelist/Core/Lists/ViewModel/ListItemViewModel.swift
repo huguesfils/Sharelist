@@ -42,8 +42,8 @@ class ListItemViewModel: ObservableObject {
     }
     
     func toggleCompleted(for item: ListItem) {
-        
         guard let index = list.listItems.firstIndex(where: { $0.id == item.id }) else { return }
+        
         var currentItem = list.listItems[index]
         
         if !currentItem.completed && currentItem.completedBy == nil {
@@ -59,7 +59,6 @@ class ListItemViewModel: ObservableObject {
         list.listItems[index] = currentItem
         
         updateList()
-        
     }
     
     func fetchUser() async {
@@ -120,14 +119,10 @@ class ListItemViewModel: ObservableObject {
     func addGuest(userId: String) {
         if list.guests.contains(where: { $0 == userId}) {
             list.guests.removeAll(where: { $0 == userId })
-//            updateList()
         } else {
             list.guests.append(userId)
-//            updateList()
-            
         }
         print("DEBUG: Guests => ",list.guests)
         shouldUpdateList = true
-//        fetchUsers()
     }
 }

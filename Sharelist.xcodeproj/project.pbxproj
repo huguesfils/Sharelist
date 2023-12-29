@@ -66,6 +66,7 @@
 		BB003AF32B2B18C4000B454F /* InvitesListsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListsViewModel.swift; sourceTree = "<group>"; };
 		BB003AF52B2B1A0C000B454F /* InvitesListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListItemView.swift; sourceTree = "<group>"; };
 		BB003AF72B2B1A1E000B454F /* InvitesListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListItemViewModel.swift; sourceTree = "<group>"; };
+		BB0BADDF2B3F04FB00693982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BB947C442B0B70CD00107A74 /* Sharelist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharelist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB947C472B0B70CD00107A74 /* SharelistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharelistApp.swift; sourceTree = "<group>"; };
 		BB947C4B2B0B70CE00107A74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 		BB947C462B0B70CD00107A74 /* Sharelist */ = {
 			isa = PBXGroup;
 			children = (
+				BB0BADDF2B3F04FB00693982 /* Info.plist */,
 				BBBB1FA52B0B73AF00F1AF9B /* App */,
 				BBBB1FA62B0B73C400F1AF9B /* Root */,
 				BBBB1FA42B0B739500F1AF9B /* Core */,
@@ -422,11 +424,12 @@
 			};
 			buildConfigurationList = BB947C3F2B0B70CD00107A74 /* Build configuration list for PBXProject "Sharelist" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = BB947C3B2B0B70CD00107A74;
 			packageReferences = (
@@ -665,6 +668,7 @@
 				DEVELOPMENT_TEAM = RT62BPUMZ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sharelist/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sharelist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -697,6 +701,7 @@
 				DEVELOPMENT_TEAM = RT62BPUMZ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sharelist/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sharelist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

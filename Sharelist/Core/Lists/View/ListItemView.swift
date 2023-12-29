@@ -9,10 +9,8 @@ import SwiftUI
 
 struct ListItemView: View {
     @ObservedObject var viewModel: ListItemViewModel
-    @Environment(\.presentationMode) var presentationMode
     @State var isSheetVisible: Bool = false
     
-
     var body: some View {
         ZStack {
             Color("CustomBackgroundColor").ignoresSafeArea()
@@ -31,7 +29,16 @@ struct ListItemView: View {
                         Spacer()
                         
                         if let completedBy = item.completedBy {
-                            Text(completedBy.fullname)
+                            VStack(alignment: .leading) {
+                                Text(completedBy.fullname)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 12))
+                                Text("s'en occupe !")
+                                    .foregroundStyle(.secondary)
+                                    .font(.system(size: 10))
+                            }
+                            
                         }
                         
                         Button(action: {
@@ -65,38 +72,27 @@ struct ListItemView: View {
             }
         }
         .sheet(isPresented: $isSheetVisible) {
-            VStack {
-                SearchBar(text: $viewModel.searchText)
-                    .padding()
-                
-                List(viewModel.users.filter { $0.email.localizedCaseInsensitiveContains(viewModel.searchText) }) { user in
-                    HStack {
-                        Text(user.email)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            viewModel.addGuest(userId: user.id)
-                        }) {
-                            Image(systemName: viewModel.list.guests.contains { $0 == user.id } ? "checkmark.circle.fill" : "plus")
-                        }
-                    }
+            NavigationStack{
+                VStack {
+                    List(viewModel.users.filter { $0.email.localizedCaseInsensitiveContains(viewModel.searchText) }) { user in
+                        HStack {
+                            Text(user.email)
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                viewModel.addGuest(userId: user.id)
+                            }) {
+                                Image(systemName: viewModel.list.guests.contains { $0 == user.id } ? "checkmark.circle.fill" : "plus")
+                                    .foregroundColor(.blue)
+                            }
+                        }.listRowSeparator(.hidden)
+                    }.listStyle(.plain)
                 }
-                Button(action: {
-
-                    if viewModel.shouldUpdateList {
-                        viewModel.updateList()
-                        viewModel.shouldUpdateList = false
-                        isSheetVisible = false
-                    } else {
-                        isSheetVisible = false
-                    }
-                }) {
-                    Text("Fermer")
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-                .padding()
             }
+            .searchable(text: $viewModel.searchText, prompt: "Email")
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
             .onAppear {
                 viewModel.fetchUsers()
             }
@@ -106,7 +102,8 @@ struct ListItemView: View {
                     viewModel.shouldUpdateList = false
                 }
             }
-        }
+        }.background(
+            Color("CustomBackgroundColor"))
     }
     
     private func deleteListItem(at offsets: IndexSet) {
