@@ -16,14 +16,12 @@ class ListViewModel: ObservableObject {
     @Published var updatedTitle = ""
     @Published var isEditing = false
     
-    private var databaseReference = Firestore.firestore().collection("lists")
     private var dataController: DataController
     
-    init(dataController: DataController = .shared){
+    init(dataController: DataController = DataController()) {
         self.dataController = dataController
         fetchLists()
     }
-    
     
     func addList() {
         guard canSave else {
@@ -34,13 +32,14 @@ class ListViewModel: ObservableObject {
         }
         
         let newList = ListModel(title: title, userId: userId, listItems: [], guests: [])
-        do {
-            let _ = try databaseReference.addDocument(from: newList)
-        } catch let error {
-            fatalError(error.localizedDescription)
+        dataController.addDocument(newList) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("List added successfully")
+            }
         }
     }
-    
     
     var canSave: Bool {
         guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
@@ -50,35 +49,17 @@ class ListViewModel: ObservableObject {
     }
     
     func fetchLists() {
-        let currentUser = Auth.auth().currentUser // Récupérer l'utilisateur en cours
-        
-        guard let currentUserId = currentUser?.uid else {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {
             print("No current user")
             return
         }
         
-        let query = Firestore.firestore().collection("lists").whereField("userId", isEqualTo: currentUserId)
-        
-        query.addSnapshotListener { (querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
-                print("No documents")
-                return
-            }
-            self.lists = documents.compactMap { queryDocumentSnapshot -> ListModel? in
-                guard let listModel = try? queryDocumentSnapshot.data(as: ListModel.self) else {
-                    return nil
-                }
-                return listModel
-            }
-        }
-    }
-    
-    func updateList(title: String, id: String) {
-        databaseReference.document(id).updateData(["title" : title]) { error in
-            if let error = error {
+        dataController.fetchLists(forUserId: currentUserId) { [weak self] result in
+            switch result {
+            case .success(let lists):
+                self?.lists = lists
+            case .failure(let error):
                 print(error.localizedDescription)
-            } else {
-                print("Note updated succesfully")
             }
         }
     }
@@ -86,7 +67,7 @@ class ListViewModel: ObservableObject {
     func deleteList(at indexSet: IndexSet) {
         indexSet.forEach { index in
             let list = lists[index]
-            databaseReference.document(list.id ?? "").delete { error in
+            dataController.deleteList(withId: list.id ?? "") { error in
                 if let error = error {
                     print("\(error.localizedDescription)")
                 } else {

@@ -21,7 +21,15 @@ struct InvitesListItemView: View {
                         Spacer()
                         
                         if let completedBy = item.completedBy {
-                            Text(completedBy.fullname)
+                            VStack(alignment: .leading) {
+                                Text(completedBy.fullname)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 12))
+                                Text("s'en occupe !")
+                                    .foregroundStyle(.secondary)
+                                    .font(.system(size: 10))
+                            }
                         }
                         
                         Button(action: {

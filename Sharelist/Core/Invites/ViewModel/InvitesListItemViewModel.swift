@@ -6,19 +6,17 @@
 //
 
 import Foundation
-import Firebase
-import FirebaseFirestore
 
 @MainActor
 class InvitesListItemViewModel: ObservableObject {
     @Published var list: ListModel
     @Published var currentUser: User?
     
-    private var databaseReference = Firestore.firestore().collection("lists")
+    private var dataController: DataController
     
-    
-    init(list: ListModel) {
+    init(list: ListModel, dataController: DataController = DataController()) {
         self.list = list
+        self.dataController = dataController
         Task {
             await fetchUser()
         }
@@ -45,19 +43,25 @@ class InvitesListItemViewModel: ObservableObject {
     }
     
     func fetchUser() async {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-        self.currentUser = try? snapshot.data(as: User.self)
-    }
-    
-    
+            dataController.fetchCurrentUser { result in
+                switch result {
+                case .success(let user):
+                    DispatchQueue.main.async {
+                        self.currentUser = user
+                    }
+                case .failure(let error):
+                    print("Error fetching user: \(error.localizedDescription)")
+                }
+            }
+        }
     
     private func updateList() {
-        do {
-            let data = try Firestore.Encoder().encode(list)
-            databaseReference.document(list.id!).setData(data)
-        } catch {
-            print("Error updating document: \(error)")
+        dataController.updateList(list) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("List updated successfully")
+            }
         }
     }
 }

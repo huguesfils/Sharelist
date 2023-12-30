@@ -19,15 +19,15 @@ class ListItemViewModel: ObservableObject {
     @Published var currentUser: User?
     @Published var shouldUpdateList = false
     
-    private var databaseReference = Firestore.firestore().collection("lists")
+    private var dataController: DataController
     
-    init(list: ListModel) {
+    init(list: ListModel, dataController: DataController = DataController()) {
         self.list = list
+        self.dataController = dataController
         Task {
             await fetchUser()
         }
     }
-    
     
     func addListItem() {
         let newListItem = ListItem(id: UUID().uuidString, title: "", completed: false)
@@ -62,10 +62,17 @@ class ListItemViewModel: ObservableObject {
     }
     
     func fetchUser() async {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-        self.currentUser = try? snapshot.data(as: User.self)
-    }
+            dataController.fetchCurrentUser { result in
+                switch result {
+                case .success(let user):
+                    DispatchQueue.main.async {
+                        self.currentUser = user
+                    }
+                case .failure(let error):
+                    print("Error fetching user: \(error.localizedDescription)")
+                }
+            }
+        }
     
     func deleteListItems(at offsets: IndexSet) {
         let itemsToDelete = offsets.map { index in
@@ -78,40 +85,26 @@ class ListItemViewModel: ObservableObject {
     }
     
     func updateList() {
-        do {
-            let data = try Firestore.Encoder().encode(list)
-            databaseReference.document(list.id!).setData(data)
-        } catch {
-            print("Error updating document: \(error)")
+        dataController.updateList(list) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("List updated successfully")
+            }
         }
     }
     
     func fetchUsers() {
-        let db = Firestore.firestore()
-        db.collection("users").getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error fetching users: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let documents = snapshot?.documents else {
-                print("No documents found")
-                return
-            }
-            
-            let fetchedUsers = documents.compactMap { document -> User? in
-                do {
-                    return try document.data(as: User.self)
-                } catch {
-                    print("Error decoding user: \(error.localizedDescription)")
-                    return nil
+        dataController.fetchUsers { result in
+            switch result {
+            case .success(let fetchedUsers):
+                DispatchQueue.main.async {
+                    self.users = fetchedUsers
+                    print("update users with list")
+                    print(self.users)
                 }
-            }
-            
-            DispatchQueue.main.async {
-                self.users = fetchedUsers
-                print("update users with list")
-                print(self.users)
+            case .failure(let error):
+                print("Error fetching users: \(error.localizedDescription)")
             }
         }
     }
