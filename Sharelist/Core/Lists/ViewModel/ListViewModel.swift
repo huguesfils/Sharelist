@@ -5,6 +5,7 @@
 //  Created by Hugues Fils on 20/11/2023.
 //
 
+import Foundation
 import FirebaseFirestore
 import Firebase
 
@@ -16,8 +17,10 @@ class ListViewModel: ObservableObject {
     @Published var isEditing = false
     
     private var databaseReference = Firestore.firestore().collection("lists")
+    private var dataController: DataController
     
-    init(){
+    init(dataController: DataController = .shared){
+        self.dataController = dataController
         fetchLists()
     }
     

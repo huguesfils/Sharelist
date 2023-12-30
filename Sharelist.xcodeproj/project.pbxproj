@@ -14,6 +14,7 @@
 		BB03DC1B2B2A17CF00833811 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = BB03DC1A2B2A17CF00833811 /* Pow */; };
 		BB4E1B2A2B406AA8007EEB53 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E1B292B406AA8007EEB53 /* AnalyticsManager.swift */; };
 		BB4E1B2D2B406ECB007EEB53 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = BB4E1B2C2B406ECB007EEB53 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		BB4E1B2F2B407D5B007EEB53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E1B2E2B407D5B007EEB53 /* DataController.swift */; };
 		BB947C482B0B70CD00107A74 /* SharelistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB947C472B0B70CD00107A74 /* SharelistApp.swift */; };
 		BB947C4C2B0B70CE00107A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB947C4B2B0B70CE00107A74 /* Assets.xcassets */; };
 		BB947C4F2B0B70CE00107A74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB947C4E2B0B70CE00107A74 /* Preview Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		BB003AF72B2B1A1E000B454F /* InvitesListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListItemViewModel.swift; sourceTree = "<group>"; };
 		BB0BADDF2B3F04FB00693982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BB4E1B292B406AA8007EEB53 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		BB4E1B2E2B407D5B007EEB53 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		BB947C442B0B70CD00107A74 /* Sharelist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharelist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB947C472B0B70CD00107A74 /* SharelistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharelistApp.swift; sourceTree = "<group>"; };
 		BB947C4B2B0B70CE00107A74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				BBBB1FA12B0B738A00F1AF9B /* AuthError.swift */,
 				BBBB1FA02B0B738A00F1AF9B /* User.swift */,
 				BBBB1FAF2B0B746B00F1AF9B /* ListModel.swift */,
+				BB4E1B2E2B407D5B007EEB53 /* DataController.swift */,
 				BB4E1B292B406AA8007EEB53 /* AnalyticsManager.swift */,
 			);
 			path = Model;
@@ -507,6 +510,7 @@
 				BBBB1FBD2B0B823800F1AF9B /* ListItemViewModel.swift in Sources */,
 				BB003AF62B2B1A0C000B454F /* InvitesListItemView.swift in Sources */,
 				BBBB1FB72B0B7E7B00F1AF9B /* ListViewModel.swift in Sources */,
+				BB4E1B2F2B407D5B007EEB53 /* DataController.swift in Sources */,
 				BBBB1F922B0B732F00F1AF9B /* RegisterView.swift in Sources */,
 				BBBB1F972B0B734E00F1AF9B /* AuthViewModel.swift in Sources */,
 				BBBB1FA32B0B738A00F1AF9B /* AuthError.swift in Sources */,
