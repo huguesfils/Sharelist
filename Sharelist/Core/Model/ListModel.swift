@@ -21,6 +21,7 @@ struct ListModel: Codable, Identifiable {
         case userId
         case listItems
         case guests
+        
     }
 }
 
