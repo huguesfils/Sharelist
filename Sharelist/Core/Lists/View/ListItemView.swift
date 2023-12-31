@@ -113,23 +113,6 @@ struct ListItemView: View {
     }
 }
 
-struct SearchBar: View {
-    @Binding var text: String
-    
-    var body: some View {
-        HStack {
-            TextField("Search", text: $text)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            Button(action: {
-                text = ""
-            }) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.gray)
-            }
-        }
-    }
-}
-
 #Preview {
     ListItemView(viewModel: ListItemViewModel(list: ListModel(id: "1", title: "Test", userId: "", listItems: [ListItem(id: "", title: "Item1", completed: true, completedBy: User(id: "1", fullname: "test test", email: "exemple@mail.com"))], guests: ["1234"])))
 }
