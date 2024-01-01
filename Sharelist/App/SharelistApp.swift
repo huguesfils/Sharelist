@@ -14,6 +14,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         Analytics.setAnalyticsCollectionEnabled(true)
+        
+        if ProcessInfo.processInfo.environment["unit_tests"] == "true" {
+          print("Setting up Firebase emulator localhost:8080")
+          let settings = Firestore.firestore().settings
+          settings.host = "localhost:8080"
+            settings.cacheSettings =
+            MemoryCacheSettings(garbageCollectorSettings: MemoryLRUGCSettings())
+//          settings.isPersistenceEnabled = false
+          settings.isSSLEnabled = false
+          Firestore.firestore().settings = settings
+        }
         return true
     }
 }

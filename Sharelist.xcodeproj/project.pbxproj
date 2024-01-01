@@ -45,6 +45,7 @@
 		BBBB1FB92B0B81F000F1AF9B /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FB82B0B81F000F1AF9B /* ListView.swift */; };
 		BBBB1FBB2B0B821D00F1AF9B /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FBA2B0B821D00F1AF9B /* ListItemView.swift */; };
 		BBBB1FBD2B0B823800F1AF9B /* ListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FBC2B0B823800F1AF9B /* ListItemViewModel.swift */; };
+		BBD944AC2B4321450035B195 /* MockFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD944AB2B4321450035B195 /* MockFirestore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,8 @@
 		BBBB1FB82B0B81F000F1AF9B /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		BBBB1FBA2B0B821D00F1AF9B /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 		BBBB1FBC2B0B823800F1AF9B /* ListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemViewModel.swift; sourceTree = "<group>"; };
+		BBD944AB2B4321450035B195 /* MockFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirestore.swift; sourceTree = "<group>"; };
+		BBD944AD2B433BE70035B195 /* Sharelist.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sharelist.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,7 @@
 		BB947C3B2B0B70CD00107A74 = {
 			isa = PBXGroup;
 			children = (
+				BBD944AD2B433BE70035B195 /* Sharelist.xctestplan */,
 				BBBB1FB12B0B756200F1AF9B /* README.md */,
 				BB947C462B0B70CD00107A74 /* Sharelist */,
 				BB947C572B0B70CE00107A74 /* SharelistTests */,
@@ -216,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				BB947C582B0B70CE00107A74 /* SharelistTests.swift */,
+				BBD944AB2B4321450035B195 /* MockFirestore.swift */,
 			);
 			path = SharelistTests;
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB947C592B0B70CE00107A74 /* SharelistTests.swift in Sources */,
+				BBD944AC2B4321450035B195 /* MockFirestore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

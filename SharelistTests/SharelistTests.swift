@@ -8,29 +8,82 @@
 import XCTest
 @testable import Sharelist
 
-final class SharelistTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+class DataControllerTests: XCTestCase {
+    var dataController: DataController!
+    
+    override func setUp() {
+        super.setUp()
+        dataController = DataController()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        dataController = nil
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testAddDocument() {
+        let expectation = XCTestExpectation(description: "Add document")
+        
+        let list = ListModel(title: "Test List", userId: "testUserId", listItems: [], guests: [])
+        
+        dataController.addDocument(list) { error in
+            XCTAssertNil(error, "Error adding document")
+            expectation.fulfill()
         }
+        
+        wait(for: [expectation], timeout: 5.0)
     }
-
+    
+    func testFetchLists() {
+        let expectation = XCTestExpectation(description: "Fetch lists")
+        
+        let userId = "testUserId"
+        
+        dataController.fetchLists(forUserId: userId) { result in
+            switch result {
+            case .success(let lists):
+                XCTAssertEqual(lists.count, 2, "Lists count should be 2")
+            case .failure(let error):
+                XCTFail("Error fetching lists: \(error.localizedDescription)")
+            }
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testUpdateList() {
+        let expectation = XCTestExpectation(description: "Update list")
+        
+        var list = ListModel(title: "Test List", userId: "testUserId", listItems: [], guests: [])
+        
+        dataController.addDocument(list) { error in
+            XCTAssertNil(error, "Error adding document")
+            
+            // Mettez à jour l'ID de la liste avec l'ID renvoyé par addDocument()
+            list.id = "updatedListId"
+            
+            self.dataController.updateList(list) { error in
+                XCTAssertNil(error, "Error updating list")
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testDeleteList() {
+        let expectation = XCTestExpectation(description: "Delete list")
+        
+        let listId = "testListId"
+        
+        dataController.deleteList(withId: listId) { error in
+            XCTAssertNil(error, "Error deleting list")
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
 }

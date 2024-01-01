@@ -1,0 +1,52 @@
+{
+  "configurations" : [
+    {
+      "id" : "554A0A9D-E97C-46E5-BC98-E3A7FE314786",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "-FIRDebugDisabled"
+      },
+      {
+        "argument" : "-FIRAnalyticsDebugEnabled",
+        "enabled" : false
+      }
+    ],
+    "environmentVariableEntries" : [
+      {
+        "key" : "unit_tests",
+        "value" : "true"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Sharelist.xcodeproj",
+      "identifier" : "BB947C432B0B70CD00107A74",
+      "name" : "Sharelist"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Sharelist.xcodeproj",
+        "identifier" : "BB947C532B0B70CE00107A74",
+        "name" : "SharelistTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Sharelist.xcodeproj",
+        "identifier" : "BB947C5D2B0B70CE00107A74",
+        "name" : "SharelistUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
