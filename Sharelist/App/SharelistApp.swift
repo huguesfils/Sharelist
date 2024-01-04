@@ -21,7 +21,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
           settings.host = "localhost:8080"
             settings.cacheSettings =
             MemoryCacheSettings(garbageCollectorSettings: MemoryLRUGCSettings())
-//          settings.isPersistenceEnabled = false
           settings.isSSLEnabled = false
           Firestore.firestore().settings = settings
         }

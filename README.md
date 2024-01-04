@@ -13,3 +13,11 @@ To install Sharelist, follow these steps:
 3. Add your GoogleService-Info file.
 4. Configure the necessary environment variables.
 5. Run the application.
+
+## Testing
+
+To run the tests for Sharelist, make sure to install the Firestore emulator. Follow these steps:
+
+1. Install the Firestore emulator here is a tutorial: https://betterprogramming.pub/configure-firebase-emulators-cf68f4da387d
+2. Start the Firestore emulator by running: `firebase emulators:start`
+3. Run the tests using XCode

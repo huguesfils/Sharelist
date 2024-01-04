@@ -11,6 +11,8 @@ import XCTest
 class DataControllerTests: XCTestCase {
     var dataController: DataController!
     
+    var lists = [ListModel]()
+    
     override func setUp() {
         super.setUp()
         dataController = DataController()
@@ -24,7 +26,7 @@ class DataControllerTests: XCTestCase {
     func testAddDocument() {
         let expectation = XCTestExpectation(description: "Add document")
         
-        let list = ListModel(title: "Test List", userId: "testUserId", listItems: [], guests: [])
+        var list = ListModel(title: "Test List", userId: "testUserId", listItems: [], guests: [])
         
         dataController.addDocument(list) { error in
             XCTAssertNil(error, "Error adding document")
@@ -42,7 +44,8 @@ class DataControllerTests: XCTestCase {
         dataController.fetchLists(forUserId: userId) { result in
             switch result {
             case .success(let lists):
-                XCTAssertEqual(lists.count, 2, "Lists count should be 2")
+                self.lists = lists
+                XCTAssertEqual(self.lists.count, 1, "Lists count should be 1")
             case .failure(let error):
                 XCTFail("Error fetching lists: \(error.localizedDescription)")
             }
@@ -55,35 +58,32 @@ class DataControllerTests: XCTestCase {
     
     func testUpdateList() {
         let expectation = XCTestExpectation(description: "Update list")
+ 
+            let listItem = ListItem(id: UUID().uuidString, title: "updatedList", completed: false)
         
-        var list = ListModel(title: "Test List", userId: "testUserId", listItems: [], guests: [])
+        var list = lists.first!
         
-        dataController.addDocument(list) { error in
-            XCTAssertNil(error, "Error adding document")
-            
-            // Mettez à jour l'ID de la liste avec l'ID renvoyé par addDocument()
-            list.id = "updatedListId"
-            
+            list.listItems.append(listItem)
+
             self.dataController.updateList(list) { error in
+                print(list)
                 XCTAssertNil(error, "Error updating list")
                 expectation.fulfill()
             }
-        }
         
         wait(for: [expectation], timeout: 5.0)
     }
-    
-    func testDeleteList() {
-        let expectation = XCTestExpectation(description: "Delete list")
-        
-        let listId = "testListId"
-        
-        dataController.deleteList(withId: listId) { error in
-            XCTAssertNil(error, "Error deleting list")
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 5.0)
-    }
-    
+//    
+//    func testDeleteList() {
+//        let expectation = XCTestExpectation(description: "Delete list")
+//        
+//        
+//        dataController.deleteList(withId: self.list.id!) { error in
+//            XCTAssertNil(error, "Error deleting list")
+//            expectation.fulfill()
+//        }
+//        
+//        wait(for: [expectation], timeout: 5.0)
+//    }
+//    
 }

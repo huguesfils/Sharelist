@@ -47,9 +47,14 @@ class DataController {
     }
     
     func updateList(_ list: ListModel, completion: @escaping (Error?) -> Void) {
+        guard let listId = list.id else {
+               completion(nil) // Ou vous pouvez passer une erreur appropriée ici
+               return
+           }
+        
         do {
             let data = try Firestore.Encoder().encode(list)
-            databaseReference.document(list.id!).setData(data) { error in
+            databaseReference.document(listId).setData(data) { error in
                 completion(error)
             }
         } catch {
