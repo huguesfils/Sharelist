@@ -18,9 +18,10 @@
 		BB947C482B0B70CD00107A74 /* SharelistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB947C472B0B70CD00107A74 /* SharelistApp.swift */; };
 		BB947C4C2B0B70CE00107A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB947C4B2B0B70CE00107A74 /* Assets.xcassets */; };
 		BB947C4F2B0B70CE00107A74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB947C4E2B0B70CE00107A74 /* Preview Assets.xcassets */; };
-		BB947C592B0B70CE00107A74 /* SharelistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB947C582B0B70CE00107A74 /* SharelistTests.swift */; };
+		BB947C592B0B70CE00107A74 /* DataControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB947C582B0B70CE00107A74 /* DataControllerTests.swift */; };
 		BB947C632B0B70CE00107A74 /* SharelistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB947C622B0B70CE00107A74 /* SharelistUITests.swift */; };
 		BB947C652B0B70CE00107A74 /* SharelistUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB947C642B0B70CE00107A74 /* SharelistUITestsLaunchTests.swift */; };
+		BBAF05962B4990FB0015CF2E /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAF05942B4990FB0015CF2E /* AuthViewModelTests.swift */; };
 		BBBB1F822B0B722000F1AF9B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BBBB1F812B0B722000F1AF9B /* FirebaseAnalytics */; };
 		BBBB1F842B0B722000F1AF9B /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BBBB1F832B0B722000F1AF9B /* FirebaseAnalyticsSwift */; };
 		BBBB1F862B0B722000F1AF9B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BBBB1F852B0B722000F1AF9B /* FirebaseAuth */; };
@@ -45,7 +46,6 @@
 		BBBB1FB92B0B81F000F1AF9B /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FB82B0B81F000F1AF9B /* ListView.swift */; };
 		BBBB1FBB2B0B821D00F1AF9B /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FBA2B0B821D00F1AF9B /* ListItemView.swift */; };
 		BBBB1FBD2B0B823800F1AF9B /* ListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB1FBC2B0B823800F1AF9B /* ListItemViewModel.swift */; };
-		BBD944AC2B4321450035B195 /* MockFirestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD944AB2B4321450035B195 /* MockFirestore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,10 +78,11 @@
 		BB947C4B2B0B70CE00107A74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB947C4E2B0B70CE00107A74 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BB947C542B0B70CE00107A74 /* SharelistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharelistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB947C582B0B70CE00107A74 /* SharelistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharelistTests.swift; sourceTree = "<group>"; };
+		BB947C582B0B70CE00107A74 /* DataControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerTests.swift; sourceTree = "<group>"; };
 		BB947C5E2B0B70CE00107A74 /* SharelistUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharelistUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB947C622B0B70CE00107A74 /* SharelistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharelistUITests.swift; sourceTree = "<group>"; };
 		BB947C642B0B70CE00107A74 /* SharelistUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharelistUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BBAF05942B4990FB0015CF2E /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
 		BBBB1F8B2B0B723000F1AF9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BBBB1F8E2B0B732F00F1AF9B /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BBBB1F8F2B0B732F00F1AF9B /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		BBBB1FB82B0B81F000F1AF9B /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		BBBB1FBA2B0B821D00F1AF9B /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 		BBBB1FBC2B0B823800F1AF9B /* ListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemViewModel.swift; sourceTree = "<group>"; };
-		BBD944AB2B4321450035B195 /* MockFirestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirestore.swift; sourceTree = "<group>"; };
 		BBD944AD2B433BE70035B195 /* Sharelist.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sharelist.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -219,8 +219,8 @@
 		BB947C572B0B70CE00107A74 /* SharelistTests */ = {
 			isa = PBXGroup;
 			children = (
-				BB947C582B0B70CE00107A74 /* SharelistTests.swift */,
-				BBD944AB2B4321450035B195 /* MockFirestore.swift */,
+				BB947C582B0B70CE00107A74 /* DataControllerTests.swift */,
+				BBAF05942B4990FB0015CF2E /* AuthViewModelTests.swift */,
 			);
 			path = SharelistTests;
 			sourceTree = "<group>";
@@ -533,8 +533,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB947C592B0B70CE00107A74 /* SharelistTests.swift in Sources */,
-				BBD944AC2B4321450035B195 /* MockFirestore.swift in Sources */,
+				BBAF05962B4990FB0015CF2E /* AuthViewModelTests.swift in Sources */,
+				BB947C592B0B70CE00107A74 /* DataControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

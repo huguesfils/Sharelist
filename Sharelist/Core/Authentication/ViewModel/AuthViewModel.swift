@@ -36,19 +36,20 @@ class AuthViewModel: ObservableObject {
             isLoading = false
         }
     }
-    
+        
     func signIn(withEmail email: String, password: String) async throws {
         isLoading = true
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
-            await fetchUser()
+            await fetchUser() // Mettez à jour currentUser après la connexion
             isLoading = false
         } catch {
             let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
             self.showAlert = true
             self.authError = AuthError(authErrorCode: authError ?? .userNotFound)
             isLoading = false
+            throw error  // Re-lancez l'erreur pour la traiter dans le test
         }
     }
     
