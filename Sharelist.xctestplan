@@ -32,7 +32,6 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Sharelist.xcodeproj",
         "identifier" : "BB947C532B0B70CE00107A74",

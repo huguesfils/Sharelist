@@ -73,7 +73,7 @@ class ListViewModel: ObservableObject {
                 } else {
                     print("List with ID \(list.id ?? "") deleted")
                 }
-            }
+            } 
         }
     }
 }
